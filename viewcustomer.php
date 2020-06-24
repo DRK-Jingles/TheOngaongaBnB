@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <?php
-include "checksession.php";
-checkUser();
-loginStatus(); 
+//include "checksession.php";
+//checkUser();
+//loginStatus(); 
 ?>
 <html><head><title>View Customer</title> </head>
  <body>

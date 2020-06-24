@@ -5,7 +5,7 @@ echo '<div id="site_content">';
 include "elements\sidebar.php";
 
 echo '<div id="content">';
-include "elements\content.php";
+include "elements\privacystatement.php";
 
 echo '</div></div>';
 include "elements\footer.php";

@@ -1,8 +1,11 @@
-<!DOCTYPE HTML>
-<html><head><title>Edit a room</title> </head>
- <body>
-
 <?php
+include "elements\header.php";
+include "elements\menu.php";
+echo '<div id="site_content">';
+include "elements\sidebar.php";
+
+echo '<div id="content">';
+
 include "config.php"; //load in any variables
 $DBC = mysqli_connect("127.0.0.1", DBUSER, DBPASSWORD, DBDATABASE);
 
@@ -57,7 +60,7 @@ if (isset($_POST['submit']) and !empty($_POST['submit']) and ($_POST['submit'] =
 //        header('Location: http://localhost/bit608/listrooms.php', true, 303);      
     } else { 
       echo "<h2>$msg</h2>".PHP_EOL;
-    }      
+    }
 }
 //locate the room to edit by using the roomID
 //we also include the room ID in our form for sending it back for saving the data
@@ -68,7 +71,7 @@ if ($rowcount > 0) {
   $row = mysqli_fetch_assoc($result);
 ?>
 <h1>Room Details Update</h1>
-<h2><a href='listrooms.php'>[Return to the room listing]</a><a href='/bnb/'>[Return to the main page]</a></h2>
+<h2><a href='listrooms.php'>[Return to the room listing]</a><a href='index.php'>[Return to the main page]</a></h2>
 
 <form method="POST" action="editroom.php">
   <input type="hidden" name="id" value="<?php echo $id;?>">
@@ -78,7 +81,7 @@ if ($rowcount > 0) {
   </p> 
   <p>
     <label for="description">Description: </label>
-    <input type="text" id="description" name="description" size="100" minlength="5" maxlength="200" value="<?php echo $row['description']; ?>" required> 
+    <input type="text" id="description" name="description" size="60" minlength="5" maxlength="200" value="<?php echo $row['description']; ?>" required> 
   </p>  
   <p>  
     <label for="roomtype">Room type: </label>
@@ -96,7 +99,8 @@ if ($rowcount > 0) {
   echo "<h2>room not found with that ID</h2>"; //simple error feedback
 }
 mysqli_close($DBC); //close the connection once done
+
+
+echo '</div></div>';
+include "elements\footer.php";
 ?>
-</body>
-</html>
-  

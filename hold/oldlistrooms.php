@@ -1,12 +1,8 @@
+<!DOCTYPE HTML>
+<html><head><title>Browse rooms</title> </head>
+ <body>
+
 <?php
-include "header.php";
-include "menu.php";
-echo '<div id="site_content">';
-include "sidebar.php";
-
-echo '<div id="content">';
-
-
 include "config.php"; //load in any variables
 $DBC = mysqli_connect("127.0.0.1", DBUSER, DBPASSWORD, DBDATABASE);
 
@@ -39,14 +35,11 @@ if ($rowcount > 0) {
       echo '</tr>'.PHP_EOL;
    }
 } else echo "<h2>No rooms found!</h2>"; //suitable feedback
-echo "</table>";
+
 mysqli_free_result($result); //free any memory used by the query
 mysqli_close($DBC); //close the connection once done
-
-
-
-echo '</div></div>';
-require_once "footer.php";
 ?>
-
+</table>
+</body>
+</html>
   

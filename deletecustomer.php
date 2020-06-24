@@ -1,8 +1,11 @@
-<!DOCTYPE HTML>
-<html><head><title>View Customer</title> </head>
- <body>
-
 <?php
+include "elements\header.php";
+include "elements\menu.php";
+echo '<div id="site_content">';
+include "elements\sidebar.php";
+
+echo '<div id="content">';
+
 include "config.php"; //load in any variables
 $DBC = mysqli_connect("127.0.0.1", DBUSER, DBPASSWORD, DBDATABASE);
 
@@ -82,13 +85,14 @@ if ($rowcount > 0) {
      <input type="submit" name="submit" value="Delete">
      <a href="listcustomers.php">[Cancel]</a>
      </form>
-<?php    
+<?php
 } else echo "<h2>No Customer found, possbily deleted!</h2>"; //suitable feedback
 
 mysqli_free_result($result); //free any memory used by the query
 mysqli_close($DBC); //close the connection once done
+
+
+
+echo '</div></div>';
+include "elements\footer.php";
 ?>
-</table>
-</body>
-</html>
-  

@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS bnb;
-USE bnb;
+CREATE DATABASE IF NOT EXISTS TheOngaongaBnB;
+USE TheOngaongaBnB;
 
 -- The rooms for the bed and breakfast
 DROP TABLE IF EXISTS room;
@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS room (
   roomID int unsigned NOT NULL auto_increment,
   roomname varchar(100) NOT NULL,
   description text default NULL,
-  roomtype character default 'D',  
+  roomtype character default 'D',
   beds int,
   PRIMARY KEY (roomID)
 ) AUTO_INCREMENT=1;
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS customer (
   firstname varchar(50) NOT NULL,
   lastname varchar(50) NOT NULL,
   email varchar(100) NOT NULL,
-  password varchar(40) NOT NULL,
+  password varchar(40) NULL,
   PRIMARY KEY (customerID)
 ) AUTO_INCREMENT=1;
 
@@ -57,3 +57,16 @@ INSERT INTO customer (customerID,firstname,lastname,email) VALUES (1,"Garrison",
 (19,"Abbot","Rose","non@et.ca"),
 (20,"Barry","Burks","risus@libero.net");
 
+-- bookings
+DROP TABLE IF EXISTS booking;
+CREATE TABLE IF NOT EXISTS booking (
+  bookingID int unsigned NOT NULL auto_increment,
+  roomID int NOT NULL,
+  customerID int NOT NULL,
+  contactNo varchar(15) NOT NULL,
+  checkInDate date NOT NULL,
+  checkOutDate date NOT NULL,
+  extras text(300) NULL,
+  review text(300) NULL,
+  PRIMARY KEY (bookingID)
+) AUTO_INCREMENT=1;
