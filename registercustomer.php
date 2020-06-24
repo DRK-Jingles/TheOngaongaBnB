@@ -127,5 +127,5 @@ if (isset($_POST['submit']) and !empty($_POST['submit']) and ($_POST['submit'] =
 </form>
 <?php
 echo '</div></div>';
-include "footer.php";
+include "elements\footer.php";
 ?>
