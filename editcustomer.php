@@ -56,7 +56,7 @@ if (isset($_POST['submit']) and !empty($_POST['submit']) and ($_POST['submit'] =
         $stmt = mysqli_prepare($DBC,$query); //prepare the query
         mysqli_stmt_bind_param($stmt,'ssssi', $firstname, $lastname, $email,$username,$id);
         mysqli_stmt_execute($stmt);
-        mysqli_stmt_close($stmt);    
+        mysqli_stmt_close($stmt);
         echo "<h2>customer details updated.</h2>";
 //        header('Location: http://localhost/bit608/listcustomers.php', true, 303);
     } else {
@@ -101,5 +101,6 @@ if ($rowcount > 0) {
 mysqli_close($DBC); //close the connection once done
 
 echo '</div></div>';
+echo '<div id="footer">';
 include "elements\footer.php";
 ?>

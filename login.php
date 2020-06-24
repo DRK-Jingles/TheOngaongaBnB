@@ -73,5 +73,6 @@ if (isset($_POST['login']) and !empty($_POST['login']) and ($_POST['login'] == '
 </form>
 <?php
 echo '</div></div>';
+echo '<div id="footer">';
 include "elements\footer.php";
 ?>

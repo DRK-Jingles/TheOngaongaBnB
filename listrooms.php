@@ -45,5 +45,6 @@ mysqli_close($DBC); //close the connection once done
 
 
 echo '</div></div>';
+echo '<div id="footer">';
 include "elements\footer.php";
 ?>

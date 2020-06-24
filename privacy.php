@@ -8,5 +8,6 @@ echo '<div id="content">';
 include "elements\privacystatement.php";
 
 echo '</div></div>';
+echo '<div id="footer">';
 include "elements\footer.php";
 ?>

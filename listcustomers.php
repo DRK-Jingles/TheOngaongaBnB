@@ -72,5 +72,6 @@ function searchResult(searchstr) {
 
 <?php
 echo '</div></div>';
+echo '<div id="footer">';
 include "elements\footer.php";
 ?>
