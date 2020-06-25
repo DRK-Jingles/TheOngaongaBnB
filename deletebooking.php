@@ -19,74 +19,77 @@ if (mysqli_connect_errno()) {
     echo "Error: Unable to connect to MySQL. ".mysqli_connect_error() ;
     exit; //stop processing the page further
 }
+//this line is for debugging purposes so that we can see the actual POST/GET data
+//echo "<pre>"; var_dump($_POST); var_dump($_GET);echo "</pre>";
 
 //function to clean input but not validate type and content
 function cleanInput($data) {
   return htmlspecialchars(stripslashes(trim($data)));
 }
-
-//retrieve the customerid from the URL
+//retrieve the id from the URL
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $id = $_GET['id'];
     if (empty($id) or !is_numeric($id)) {
-        echo "<h2>Invalid Customer ID</h2>"; //simple error feedback
+        echo "<h2>Invalid bookingID</h2>"; //simple error feedback
         exit;
     }
 }
-
-//the data was sent using a formtherefore we use the $_POST instead of $_GET
 //check if we are saving data first by checking if the submit button exists in the array
-if (isset($_POST['submit']) and !empty($_POST['submit']) and ($_POST['submit'] == 'Delete')) {
+if (isset($_POST['submit']) and !empty($_POST['submit'])
+    and ($_POST['submit'] == 'Delete')) {
     $error = 0; //clear our error flag
     $msg = 'Error: ';
-//customerID (sent via a form it is a string not a number so we try a type conversion!)
-    if (isset($_POST['id']) and !empty($_POST['id']) and is_integer(intval($_POST['id']))) {
+//ID (sent via a form it is a string not a number so we try a type conversion!)
+    if (isset($_POST['id']) and !empty($_POST['id'])
+        and is_integer(intval($_POST['id']))) {
        $id = cleanInput($_POST['id']);
     } else {
        $error++; //bump the error flag
-       $msg .= 'Invalid Customer ID '; //append error message
+       $msg .= 'Invalid booking ID '; //append error message
        $id = 0;
     }
-//save the customer data if the error flag is still clear and customer id is > 0
+//save the  data if the error flag is still clear and id is > 0
     if ($error == 0 and $id > 0) {
-        $query = "DELETE FROM customer WHERE customerID=?";
+        $query = "DELETE FROM booking WHERE bookingID=?";
         $stmt = mysqli_prepare($DBC,$query); //prepare the query
         mysqli_stmt_bind_param($stmt,'i', $id);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
-        echo "<h2>Customer details deleted.</h2>";
+        echo "<h2>Booking deleted.</h2>";
     } else {
       echo "<h2>$msg</h2>".PHP_EOL;
     }
 }
+
 //prepare a query and send it to the server
-//NOTE for simplicity purposes ONLY we are not using prepared queries
-//make sure you ALWAYS use prepared queries when creating custom SQL like below
-$query = 'SELECT * FROM customer WHERE customerid='.$id;
+$query = "SELECT * FROM booking WHERE bookingid=".$id;
 $result = mysqli_query($DBC,$query);
 $rowcount = mysqli_num_rows($result);
 ?>
-<h1>Customer details preview before deletion</h1>
-<h2><a href='listcustomers.php'>[Return to the Customer listing]</a><a href='index.php'>[Return to the main page]</a></h2>
+<h1>Booking details view</h1>
+<h2><a href='listbookings.php'>[Return to the booking listing]</a></h2>
 <?php
 
-//makes sure we have the customer
 if ($rowcount > 0) {
-   echo "<fieldset><legend>Customer detail #$id</legend><dl>";
+   echo "<fieldset><legend>Booking detail #$id</legend><dl>";
    $row = mysqli_fetch_assoc($result);
-   echo "<dt>Name:</dt><dd>".$row['firstname']."</dd>".PHP_EOL;
-   echo "<dt>Lastname:</dt><dd>".$row['lastname']."</dd>".PHP_EOL;
-   echo "<dt>Email:</dt><dd>".$row['email']."</dd>".PHP_EOL;
-   echo "<dt>Password:</dt><dd>".$row['password']."</dd>".PHP_EOL;
+   echo "<dt>Booking ID:</dt><dd>".$row['bookingID']."</dd>".PHP_EOL;
+   echo "<dt>Room ID:</dt><dd>".$row['roomID']."</dd>".PHP_EOL;
+   echo "<dt>Customer ID:</dt><dd>".$row['customerID']."</dd>".PHP_EOL;
+   echo "<dt>Contact No:</dt><dd>".$row['contactNo']."</dd>".PHP_EOL;
+   echo "<dt>Check In Date:</dt><dd>".$row['checkInDate']."</dd>".PHP_EOL;
+   echo "<dt>Check Out Date:</dt><dd>".$row['checkOutDate']."</dd>".PHP_EOL;
+   echo "<dt>Extras:</dt><dd>".$row['extras']."</dd>".PHP_EOL;
+   echo "<dt>Review:</dt><dd>".$row['review']."</dd>".PHP_EOL;
    echo '</dl></fieldset>'.PHP_EOL;
-   ?><form method="POST" action="deletecustomer.php">
-     <h2>Are you sure you want to delete this customer?</h2>
+   ?><form method="POST" action="deletebooking.php">
+     <h2>Are you sure you want to delete this booking?(DONT CLICK DELETE!!)</h2>
      <input type="hidden" name="id" value="<?php echo $id; ?>">
      <input type="submit" name="submit" value="Delete">
-     <a href="listcustomers.php">[Cancel]</a>
+     <a href="listbookings.php">[Cancel]</a>
      </form>
 <?php
-} else echo "<h2>No Customer found, possbily deleted!</h2>"; //suitable feedback
+} else echo "<h2>No booking found, possibly deleted!</h2>"; //suitable feedback
 
 mysqli_free_result($result); //free any memory used by the query
 mysqli_close($DBC); //close the connection once done

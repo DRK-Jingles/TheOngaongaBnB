@@ -1,6 +1,6 @@
 <?php
 //Our customer search/filtering engine
-include "config.php"; //load in any variables
+include "admin\config.php"; //load in any variables
 $DBC = mysqli_connect("127.0.0.1", DBUSER, DBPASSWORD, DBDATABASE) or die();
 
 //do some simple validation to check if sq contains a string
@@ -28,6 +28,5 @@ if (isset($sq) and !empty($sq) and strlen($sq) < 31) {
 } else echo "<tr><td colspan=3> <h2>Invalid search query</h2>";
 mysqli_free_result($result); //free any memory used by the query
 mysqli_close($DBC); //close the connection once done
-
 echo  $searchresult;
 ?>

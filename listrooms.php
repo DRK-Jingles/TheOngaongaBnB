@@ -1,4 +1,8 @@
 <?php
+//include "admin\checksession.php";
+//checkUser('AC_MANAGER');
+//loginStatus();
+
 include "elements\header.php";
 include "elements\menu.php";
 echo '<div id="site_content">';
@@ -6,7 +10,7 @@ include "elements\sidebar.php";
 
 echo '<div id="content">';
 
-include "config.php"; //load in any variables
+include "admin\config.php"; //load in any variables
 $DBC = mysqli_connect("127.0.0.1", DBUSER, DBPASSWORD, DBDATABASE);
 
 //insert DB code from here onwards
@@ -41,8 +45,6 @@ if ($rowcount > 0) {
 echo "</table>";
 mysqli_free_result($result); //free any memory used by the query
 mysqli_close($DBC); //close the connection once done
-
-
 
 echo '</div></div>';
 echo '<div id="footer">';

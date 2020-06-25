@@ -1,4 +1,8 @@
 <?php
+//include "admin\checksession.php";
+//checkUser('AC_MANAGER');
+//loginStatus();
+
 include "elements\header.php";
 include "elements\menu.php";
 echo '<div id="site_content">';
@@ -53,7 +57,7 @@ function searchResult(searchstr) {
     }
   }
   //call our php file that will look for a customer or customers matchign the seachstring
-  xmlhttp.open("GET","customersearch.php?sq="+searchstr,true);
+  xmlhttp.open("GET","elements\customersearch.php?sq="+searchstr,true);
   xmlhttp.send();
 }
 </script>

@@ -1,5 +1,5 @@
 <?php
-//include "checksession.php";
+//include "admin\checksession.php";
 //checkUser();
 //loginStatus();
 
@@ -10,7 +10,7 @@ include "elements\sidebar.php";
 
 echo '<div id="content">';
 
-include "config.php"; //load in any variables
+include "admin\config.php"; //load in any variables
 $DBC = mysqli_connect("127.0.0.1", DBUSER, DBPASSWORD, DBDATABASE);
 
 //insert DB code from here onwards

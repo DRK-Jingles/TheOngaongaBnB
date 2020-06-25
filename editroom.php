@@ -1,4 +1,8 @@
 <?php
+//include "admin\checksession.php";
+//checkUser('AC_MANAGER');
+//loginStatus();
+
 include "elements\header.php";
 include "elements\menu.php";
 echo '<div id="site_content">';
@@ -6,7 +10,7 @@ include "elements\sidebar.php";
 
 echo '<div id="content">';
 
-include "config.php"; //load in any variables
+include "admin\config.php"; //load in any variables
 $DBC = mysqli_connect("127.0.0.1", DBUSER, DBPASSWORD, DBDATABASE);
 
 if (mysqli_connect_errno()) {
@@ -77,20 +81,20 @@ if ($rowcount > 0) {
   <input type="hidden" name="id" value="<?php echo $id;?>">
    <p>
     <label for="roomname">Room name: </label>
-    <input type="text" id="roomname" name="roomname" minlength="5" maxlength="50" value="<?php echo $row['roomname']; ?>" required> 
+    <input type="text" id="roomname" name="roomname" minlength="5" maxlength="50" value="<?php echo $row['roomname']; ?>" required>
   </p>
   <p>
     <label for="description">Description: </label>
-    <input type="text" id="description" name="description" size="60" minlength="5" maxlength="200" value="<?php echo $row['description']; ?>" required> 
+    <input type="text" id="description" name="description" size="60" minlength="5" maxlength="200" value="<?php echo $row['description']; ?>" required>
   </p>
   <p>
     <label for="roomtype">Room type: </label>
-    <input type="radio" id="roomtype" name="roomtype" value="S" <?php echo $row['roomtype']=='S'?'Checked':''; ?>> Single 
-    <input type="radio" id="roomtype" name="roomtype" value="D" <?php echo $row['roomtype']=='D'?'Checked':''; ?>> Double 
+    <input type="radio" id="roomtype" name="roomtype" value="S" <?php echo $row['roomtype']=='S'?'Checked':''; ?>> Single
+    <input type="radio" id="roomtype" name="roomtype" value="D" <?php echo $row['roomtype']=='D'?'Checked':''; ?>> Double
    </p>
   <p>
     <label for="beds">Beds (1-5): </label>
-    <input type="number" id="beds" name="beds" min="1" max="5" value="1" value="<?php echo $row['beds']; ?>" required> 
+    <input type="number" id="beds" name="beds" min="1" max="5" value="1" value="<?php echo $row['beds']; ?>" required>
   </p>
    <input type="submit" name="submit" value="Update">
  </form>
@@ -99,7 +103,6 @@ if ($rowcount > 0) {
   echo "<h2>room not found with that ID</h2>"; //simple error feedback
 }
 mysqli_close($DBC); //close the connection once done
-
 
 echo '</div></div>';
 echo '<div id="footer">';

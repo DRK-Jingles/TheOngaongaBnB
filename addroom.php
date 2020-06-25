@@ -1,4 +1,8 @@
 <?php
+//include "admin\checksession.php";
+//checkUser('AC_MANAGER');
+//loginStatus();
+
 include "elements\header.php";
 include "elements\menu.php";
 echo '<div id="site_content">';
@@ -14,7 +18,7 @@ function cleanInput($data) {
 //check if we are saving data first by checking if the submit button exists in the array
 if (isset($_POST['submit']) and !empty($_POST['submit']) and ($_POST['submit'] == 'Add')) {
 //if ($_SERVER["REQUEST_METHOD"] == "POST") { //alternative simpler POST test
-    include "config.php"; //load in any variables
+    include "admin\config.php"; //load in any variables
     $DBC = mysqli_connect("127.0.0.1", DBUSER, DBPASSWORD, DBDATABASE);
 
     if (mysqli_connect_errno()) {

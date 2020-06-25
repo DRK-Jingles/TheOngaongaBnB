@@ -1,4 +1,8 @@
 <?php
+//include "admin\checksession.php";
+//checkUser('AC_MANAGER');
+//loginStatus();
+
 include "elements\header.php";
 include "elements\menu.php";
 echo '<div id="site_content">';

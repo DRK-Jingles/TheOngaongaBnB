@@ -1,4 +1,8 @@
 <?php
+//include "admin\checksession.php";
+//checkUser('AC_MANAGER');
+//loginStatus();
+
 include "elements\header.php";
 include "elements\menu.php";
 
@@ -7,7 +11,7 @@ include "elements\sidebar.php";
 
 echo '<div id="content">';
 
-include "config.php"; //load in any variables
+include "admin\config.php"; //load in any variables
 $DBC = mysqli_connect("127.0.0.1", DBUSER, DBPASSWORD, DBDATABASE);
 
 if (mysqli_connect_errno()) {
